@@ -1,3 +1,6 @@
+.tox
+.idea
+.egg-info
 *.log
 *.pot
 *.pyc
