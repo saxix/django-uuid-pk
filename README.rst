@@ -1,6 +1,11 @@
 django-uuid-pk
 ==============
 
+
+.. image:: https://secure.travis-ci.org/saxix/django-uuid-pk.png?branch=develop
+   :target: http://travis-ci.org/saxix/django-django-uuid-pk/
+
+
 django uuidfield that can be used as primary key
 
 The reason of this project is that any other UUDField implementation that I found

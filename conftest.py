@@ -12,7 +12,12 @@ def pytest_configure(config):
                                            'django.contrib.sessions',
                                            'django.contrib.sites',
                                            'django.contrib.auth',
-                                           'django_uuid_pk.tests'))
+                                           'django_uuid_pk.tests'),
+                           SECRET_KEY = ';klkj;okj;lkn;lklj;lkj;kjmlliuewhy2ioqwjdkh',
+                           DATABASES={'default': {'ENGINE': 'django.db.backends.sqlite3',
+                                                  'NAME': 'django_uuid_pk.sqlite',
+                                                  'HOST': '',
+                                                  'PORT': ''}})
 
     settings.ALLOWED_HOSTS = ('127.0.0.1',)
 
