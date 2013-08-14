@@ -15,7 +15,7 @@ fullclean: clean
 	rm -fr .tox
 
 coverage:
-	py.test --cov=django_uuid_pk --cov-report=html --cov-config=django_uuid_pk/tests/.coveragerc
+	py.test --cov=django_uuid_pk --cov-config=django_uuid_pk/tests/.coveragerc
 ifdef BROWSE
 	firefox ${BUILDDIR}/coverage/index.html
 endif
