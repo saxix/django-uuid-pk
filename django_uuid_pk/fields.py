@@ -146,13 +146,14 @@ class UUIDField(Field):
 
     def contribute_to_class(self, cls, name):
         super(UUIDField, self).contribute_to_class(cls, name)
-        _wrap_model_save(cls)
+        if self.primary_key:
+            _wrap_model_save(cls)
 
 def _wrap_model_save(model):
-    if not hasattr(model, 'uuid_patched'):
+    if not hasattr(model, '_uuid_patched'):
         old_save = getattr(model, 'save')
         setattr(model, 'save', _wrap_save(old_save))
-        model.uuid_patched = True
+        model._uuid_patched = True
 
 def _wrap_save(func):
 
