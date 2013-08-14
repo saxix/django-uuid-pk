@@ -4,15 +4,14 @@ services:
   - PostgreSQL
 python:
   - 2.7
-  - 3.2
 env:
   - DJANGO="Django==1.4.5" DBENGINE=mysql
   - DJANGO="Django==1.4.5" DBENGINE=postgres
 
-  - DJANGO="Django==1.5.1" DBENGINE=mysql
-  - DJANGO="Django==1.5.1" DBENGINE=postgres
+  - DJANGO="Django==1.5.2" DBENGINE=mysql
+  - DJANGO="Django==1.5.2" DBENGINE=postgres
 
-  - DJANGO="https://www.djangoproject.com/download/1.6b1/tarball/" DBENGINE=postgres
+  - DJANGO="https://www.djangoproject.com/download/1.6b2/tarball/" DBENGINE=postgres
 
 install:
   - pip install uuid python-coveralls coverage pytest pytest-cov pytest-django
