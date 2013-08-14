@@ -15,7 +15,7 @@ env:
   - DJANGO="https://www.djangoproject.com/download/1.6b1/tarball/" DBENGINE=postgres
 
 install:
-  - pip install uuid python-coveralls coverage pytest pytest-cov pytest-django
+  - pip install uuid python-coveralls coverage pytest pytest-cov
   - sh -c "if [ '$DBENGINE' = 'postgres' ]; then pip install -q psycopg2; fi"
   - sh -c "if [ '$DBENGINE' = 'mysql' ]; then pip install -q MySQL-python; fi"
   - pip install -q $DJANGO

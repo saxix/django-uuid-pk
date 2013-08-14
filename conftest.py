@@ -18,6 +18,7 @@ def pytest_configure(config):
     settings.SECRET_KEY = '123',
 
     test_db = os.environ.get('DBENGINE', 'sqlite')
+
     if test_db == 'postgres':
         settings.DATABASES['default'].update({
             'ENGINE': 'django.db.backends.postgresql_psycopg2',

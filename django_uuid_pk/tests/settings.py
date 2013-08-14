@@ -4,7 +4,6 @@ STATIC_URL = '/static/'
 SECRET_KEY = ';klkj;okj;lkn;lklj;lkj;kjmlliuewhy2ioqwjdkh'
 
 INSTALLED_APPS = (
-    'django_uuid_pk',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
