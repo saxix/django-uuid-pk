@@ -4,5 +4,6 @@ include CHANGES
 include LICENSE
 include MANIFEST.in
 include setup.py
+include conftest.py
 recursive-include django_uuid_pk *.*
 recursive-exclude django_uuid_pk *.pyc
