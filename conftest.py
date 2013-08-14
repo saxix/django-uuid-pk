@@ -15,7 +15,6 @@ def pytest_configure(config):
                                            'django_uuid_pk.tests'))
 
     settings.ALLOWED_HOSTS = ('127.0.0.1',)
-    settings.SECRET_KEY = '123',
 
     test_db = os.environ.get('DBENGINE', 'sqlite')
 
@@ -25,6 +24,12 @@ def pytest_configure(config):
             'USER': 'postgres',
             'NAME': 'django_uuid_pk',
             'OPTIONS': {'autocommit': True}
+        })
+    elif test_db == 'mysql':
+        settings.DATABASES['default'].update({
+            'ENGINE': 'django.db.backends.mysql',
+            'USER': 'root',
+            'NAME': 'django_uuid_pk',
         })
     elif test_db == 'sqlite':
         settings.DATABASES['default'].update({

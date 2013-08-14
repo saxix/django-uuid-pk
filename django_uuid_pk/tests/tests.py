@@ -8,7 +8,7 @@ from django_uuid_pk.tests.models import (AutoUUIDField, ManualUUIDField, Namespa
                                          BrokenNamespaceUUIDField, PrimaryKeyUUIDField,
                                          BrokenPrimaryKeyUUIDField, ModelUUIDField)
 
-
+@pytest.mark.django_db
 class UUIDFieldTestCase(TestCase):
     def test_protocols(self):
         obj = ModelUUIDField.objects.create()

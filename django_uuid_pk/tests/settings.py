@@ -3,17 +3,6 @@ STATIC_URL = '/static/'
 # ROOT_URLCONF = 'django_uuid_pk.tests.urls'
 SECRET_KEY = ';klkj;okj;lkn;lklj;lkj;kjmlliuewhy2ioqwjdkh'
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-
-)
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
