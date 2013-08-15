@@ -139,7 +139,7 @@ class UUIDField(Field):
         # We'll just introspect the _actual_ field.
         from south.modelsinspector import introspector
 
-        field_class = "django_uuid_pk.fields.UUIDField"
+        field_class = "django.db.models.fields.CharField"
         args, kwargs = introspector(self)
         # That's our definition!
         return (field_class, args, kwargs)
