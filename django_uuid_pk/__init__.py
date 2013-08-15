@@ -2,7 +2,7 @@ import subprocess
 import datetime
 import os
 
-VERSION = __version__ = (0, 1, 0, 'alpha', 1)
+VERSION = __version__ = (0, 1, 0, 'final', 1)
 NAME='django-uuid-pk'
 __author__ = 'sax'
 
