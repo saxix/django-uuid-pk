@@ -6,7 +6,7 @@ from django.db.models import Field, SubfieldBase
 from django.utils.encoding import smart_unicode
 
 try:
-    # psycopg2 needs us to register the uuid type
+    #psycopg2 needs us to register the uuid type
     import psycopg2
 
     psycopg2.extras.register_uuid()
@@ -15,10 +15,19 @@ except (ImportError, AttributeError):
 
 
 class StringUUID(uuid.UUID):
+    def __init__(self, *args, **kwargs):
+        # get around UUID's immutable setter
+        object.__setattr__(self, 'hyphenate', kwargs.pop('hyphenate', False))
+
+        super(StringUUID, self).__init__(*args, **kwargs)
+
     def __unicode__(self):
-        return self.hex
+        return unicode(str(self))
 
     def __str__(self):
+        if self.hyphenate:
+            return super(StringUUID, self).__str__()
+
         return self.hex
 
     def __len__(self):
@@ -40,7 +49,7 @@ class UUIDField(Field):
 
         self.version = version
         # We store UUIDs in hex format, which is fixed at 32 characters.
-        kwargs['max_length'] = 32
+        kwargs['max_length'] = 36
 
         if kwargs.get('primary_key', False):
             auto = True
@@ -55,6 +64,9 @@ class UUIDField(Field):
         elif version in (3, 5):
             self.namespace, self.name = namespace, name
         super(UUIDField, self).__init__(*args, **kwargs)
+
+    #def get_internal_type(self):
+    #    return "CharField"
 
     def _create_uuid(self):
         if self.version == 1:
@@ -103,6 +115,8 @@ class UUIDField(Field):
         """
         if isinstance(value, uuid.UUID):
             return str(value)
+            #elif isinstance(value, StringUUID):
+        #    return str(value)
         return value
 
     def value_to_string(self, obj):
@@ -126,6 +140,10 @@ class UUIDField(Field):
         # instance already to be able to get our StringUUID in.
         return StringUUID(smart_unicode(value))
 
+    def get_prep_value(self, value):
+        value = super(UUIDField, self).get_prep_value(value)
+        return self.to_python(value)
+
     def formfield(self, **kwargs):
         defaults = {
             'form_class': forms.CharField,
@@ -139,7 +157,7 @@ class UUIDField(Field):
         # We'll just introspect the _actual_ field.
         from south.modelsinspector import introspector
 
-        field_class = "django.db.models.fields.CharField"
+        field_class = "django_uuid_pk.fields.UUIDField"
         args, kwargs = introspector(self)
         # That's our definition!
         return (field_class, args, kwargs)
@@ -149,14 +167,15 @@ class UUIDField(Field):
         if self.primary_key:
             _wrap_model_save(cls)
 
+
 def _wrap_model_save(model):
     if not hasattr(model, '_uuid_patched'):
         old_save = getattr(model, 'save')
         setattr(model, 'save', _wrap_save(old_save))
         model._uuid_patched = True
 
-def _wrap_save(func):
 
+def _wrap_save(func):
     def inner(self, force_insert=False, force_update=False, using=None, **kwargs):
         try:
             return func(self, force_insert, force_update, using, **kwargs)

@@ -9,26 +9,29 @@ class ModelUUIDField(models.Model):
     uuid4 = UUIDField(version=4, auto=True)
     uuid5 = UUIDField(namespace=uuid.NAMESPACE_URL, version=5, auto=True)
 
-class AutoUUIDField(models.Model):
+class AutoUUIDFieldModel(models.Model):
     uuid = UUIDField(auto=True)
 
 
-class ManualUUIDField(models.Model):
+class ManualUUIDFieldModel(models.Model):
     uuid = UUIDField(auto=False)
 
 
-class NamespaceUUIDField(models.Model):
+class NamespaceUUIDFieldModel(models.Model):
     uuid = UUIDField(auto=True, namespace=uuid.NAMESPACE_URL, version=5)
 
 
-class BrokenNamespaceUUIDField(models.Model):
+class BrokenNamespaceUUIDFieldModel(models.Model):
     uuid = UUIDField(auto=True, namespace='lala', version=5)
 
 
-class PrimaryKeyUUIDField(models.Model):
+class PrimaryKeyUUIDFieldModel(models.Model):
     uuid = UUIDField(primary_key=True)
+    #char = models.CharField(max_length=10, null=True)
 
-
-class BrokenPrimaryKeyUUIDField(models.Model):
+class BrokenPrimaryKeyUUIDFieldModel(models.Model):
     uuid = UUIDField(primary_key=True)
     unique = models.IntegerField(unique=True)
+
+    def __repr__(self):
+        return {}
