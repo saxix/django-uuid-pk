@@ -23,7 +23,7 @@ elif db == 'mysql':
             'NAME': 'django_uuid_pk',
             'HOST': '127.0.0.1',
             'PORT': '',
-            'USER': 'aa',
+            'USER': 'root',
             'PASSWORD': ''}}
 else:
     DATABASES = {
